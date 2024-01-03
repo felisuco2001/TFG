@@ -58,7 +58,6 @@ def speedCalculus(file_path):
         features[i]['properties']['speed_kmh'] = velocidad_kmph
         features[i]['properties']['speed_knot'] = velocidad_nudos
 
-
         print(f"Velocidad entre elemento {i} y elemento {i - 1}:")
         print(f" - {velocidad_kmph} km/h")
         print(f" - {velocidad_nudos} nudos")
@@ -71,7 +70,6 @@ def speedCalculus(file_path):
     features[0]['properties']['speed_kmh'] = 0
     features[0]['properties']['speed_knot'] = 0
 
-
     # Guarda el archivo GeoJSON con las nuevas propiedades
     with open(file_path, 'w') as geojson_file:
         geojson.dump(data, geojson_file, indent=2)
@@ -79,16 +77,24 @@ def speedCalculus(file_path):
     print(f"Archivo '{file_path}' actualizado con éxito.")
 
 
+
+import json
+
 def modifyTimestamp(ruta_archivo_geojson_original, ruta_archivo_geojson_nuevo):
     # Función para convertir una marca de tiempo a segundos
     def timestamp_to_seconds(timestamp):
         partes_timestamp = timestamp.split(':')
         if len(partes_timestamp) == 3:
-            horas, minutos, resto = partes_timestamp
-            segundos, milisegundos_z = resto.split('.')
-            milisegundos = milisegundos_z[:-1]
-            total_segundos = int(horas) * 3600 + int(minutos) * 60 + int(segundos) + int(milisegundos) / 1000
-            return total_segundos
+            horas, minutos, segundos = partes_timestamp
+            try:
+                # Ajustar el formato del timestamp eliminando ".000Z" y agregando ":00" si los segundos son 00
+                segundos = segundos.split('.')[0]
+                if len(segundos) == 0:
+                    segundos = '00'
+                total_segundos = int(horas) * 3600 + int(minutos) * 60 + int(segundos)
+                return total_segundos
+            except ValueError:
+                return None
         return None
 
     # Abre el archivo original y carga su contenido como un objeto JSON

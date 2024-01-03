@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 
 def refinementCSV(archivo_entrada, archivo_salida):
     delimitador = ';'
@@ -28,6 +29,13 @@ def refinementCSV(archivo_entrada, archivo_salida):
 
                     fila[0] = procesar_valor(float(fila[0]), 10, 5)
                     fila[1] = procesar_valor(float(fila[1]), 100, 4)
+
+                    # Modificar el formato del timestamp eliminando ".000Z"
+                    timestamp = fila[2].rstrip(".000Z")
+                    # Agregar segundos si son 00
+                    if len(timestamp) == 5:
+                        timestamp += ":00"
+                    fila[2] = timestamp
 
                     escritor_csv.writerow(fila)
 
@@ -59,4 +67,4 @@ def refinementCSV(archivo_entrada, archivo_salida):
         for fila in nuevas_filas:
             escritor_csv.writerow(fila)
 
-    print("Proceso completado. La columna 5 se ha agregado como columna 7 y se ha eliminado el contenido a partir del carácter 'T' en la tercera columna en el archivo de entrada con el delimitador ';' establecido.")
+    print("Proceso completado. La columna 5 se ha agregado como columna 7 y se ha eliminado la parte final '.000Z' en el timestamp en la tercera columna en el archivo de entrada con el delimitador ';' establecido.")
