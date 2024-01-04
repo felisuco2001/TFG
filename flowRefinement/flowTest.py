@@ -1,3 +1,4 @@
+from flowRefinement.DataToCSVPowerBI import geojson_to_csv
 from flowRefinement.SpeedCalculus import speedCalculus
 from flowRefinement.CSVtoGeoJSON import csvToGeoJSON
 from flowRefinement.SpeedCalculus import modifyTimestamp
@@ -9,6 +10,7 @@ archivo_salida = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\dataNor
 archivo_geojson = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\dataNorway.geojson'
 archivo_salida_geojson = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\dataNorwayFixed.geojson'
 test_geojson = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\testRandomMMSI.geojson'
+test_csv = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\testRandomMMSI.csv'
 
 nombre_coleccion = 'Vessels_August'
 nombre_coleccion_test = 'Tests_Statistics'
@@ -25,3 +27,4 @@ nombre_base_datos_tests = 'AIS_Tests'
 mmsi = obtener_mmsi_aleatorio("AIS", "Vessels_August")
 information_random_MMSI("AIS", nombre_coleccion, mmsi, test_geojson)
 insertDB(test_geojson, nombre_coleccion_test, direccion_mongodb, puerto_mongodb, nombre_base_datos)
+geojson_to_csv(test_geojson, test_csv)
