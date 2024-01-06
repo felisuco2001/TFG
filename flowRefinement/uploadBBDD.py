@@ -70,4 +70,3 @@ def information_random_MMSI(database_name, collection_name, mmsi, output_file):
     # Cierra la conexión
     client.close()
 
-

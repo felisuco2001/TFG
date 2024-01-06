@@ -3,7 +3,7 @@ from flowRefinement.SpeedCalculus import speedCalculus
 from flowRefinement.CSVtoGeoJSON import csvToGeoJSON
 from flowRefinement.SpeedCalculus import modifyTimestamp
 from flowRefinement.RefinementCSV import refinementCSV
-from flowRefinement.uploadBBDD import insertDB, obtener_mmsi_aleatorio,information_random_MMSI
+from flowRefinement.uploadBBDD import insertDB, obtener_mmsi_aleatorio, information_random_MMSI
 
 archivo_entrada = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\dataNorway.csv'
 archivo_salida = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\dataNorwayFixed.csv'
@@ -27,4 +27,6 @@ nombre_base_datos_tests = 'AIS_Tests'
 mmsi = obtener_mmsi_aleatorio("AIS", "Vessels_August")
 information_random_MMSI("AIS", nombre_coleccion, mmsi, test_geojson)
 insertDB(test_geojson, nombre_coleccion_test, direccion_mongodb, puerto_mongodb, nombre_base_datos)
-geojson_to_csv(test_geojson, test_csv)
+geojson_to_csv(test_geojson,test_csv)
+
+

@@ -1,3 +1,4 @@
+
 import csv
 import geojson
 
@@ -17,18 +18,12 @@ def csvToGeoJSON(archivo_csv, archivo_geojson):
             # Crea una Feature GeoJSON para cada par de coordenadas con su correspondiente timestamp y date
             geometry = geojson.Point([float(fila[1]), float(fila[0])])  # Latitud y longitud
 
-            # Modificar el formato del timestamp eliminando ".000Z"
-            timestamp = fila[6].rstrip(".000Z")
-            # Agregar ":00" al final si los segundos son 00
-            if len(timestamp) == 5:
-                timestamp += ":00"
-
             properties = {
                 "date": fila[2],
                 "name": fila[3],
                 "MMSI": fila[4],
                 "IMO": fila[5],
-                "timestamp": timestamp,
+                "timestamp": fila[6],  # Utiliza directamente el valor de la columna timestamp
                 "callsign": fila[7]
             }
 
@@ -43,3 +38,4 @@ def csvToGeoJSON(archivo_csv, archivo_geojson):
         geojson.dump(feature_collection, geojson_file, ensure_ascii=False, indent=2)
 
     print(f"Transformación completa. Se ha creado el archivo GeoJSON: {archivo_geojson}")
+

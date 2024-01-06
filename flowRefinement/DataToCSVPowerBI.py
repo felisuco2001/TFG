@@ -1,5 +1,6 @@
 import json
 import csv
+import pandas as pd
 
 def geojson_to_csv(geojson_path, csv_path):
     # Cargar el contenido del archivo GeoJSON
@@ -27,9 +28,4 @@ def geojson_to_csv(geojson_path, csv_path):
 
     print(f"La conversión se ha completado. El archivo CSV se encuentra en: {csv_path}")
 
-# Rutas de entrada y salida
-geojson_path = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\testRandomMMSI.geojson'
-csv_path = r'C:\Users\felix\PycharmProjects\TFG\PruebaFlujoAISData\testRandomMMSI.csv'
 
-# Llamar a la función
-geojson_to_csv(geojson_path, csv_path)
